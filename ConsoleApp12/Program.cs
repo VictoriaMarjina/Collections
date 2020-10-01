@@ -17,6 +17,7 @@ namespace StuAsp
                 Console.WriteLine("нажмите 2 чтобы добавить Аспиранта");
                 Console.WriteLine("нажмите 3 чтобы узнать информацию о Студентах");
                 Console.WriteLine("нажмите 4 чтобы узнать информацию об Аспирантах ");
+                Console.WriteLine("нажмите 5 чтобы узнать информацию о студентах и об аспирантах");
                 string answer = Console.ReadLine();
                 switch (answer)
                 {
@@ -30,10 +31,15 @@ namespace StuAsp
                         break;
                     case "3":
                         PrintInfoStu(list);
+                        PrintNewInfoStud(list);
                     Main();
                         break;
                     case "4":
                         PrintInfoAsp(list1);
+                    Main();
+                        break;
+                    case "5":
+                        PrintAllInfo(list, list1);
                     Main();
                         break;
                     default:
@@ -362,18 +368,38 @@ namespace StuAsp
                 Student.PrintInfo(st2);
 
             }
+        }
+          public static void PrintNewInfoStud(ArrayList list)
+        {
 
             list.Sort();
             PrintInfoStu(list);
-
         }
-        static void PrintInfoAsp(LinkedList<Aspirant> list1)
+     static void PrintInfoAsp(LinkedList<Aspirant> list1)
         {
 
             foreach (Aspirant i in list1)
             {
                 Console.WriteLine(i);
                 Aspirant.PrintInfo(i);
+            }
+        }
+      public static void PrintAllInfo(ArrayList list, LinkedList<Aspirant> list1)
+        {
+            Dictionary<int, ArrayList> students = new Dictionary<int, ArrayList>(1);
+            students.Add(1, list);
+
+            Dictionary<int, LinkedList<Aspirant>> aspirants = new Dictionary<int, LinkedList<Aspirant>>(1);
+            aspirants.Add(2, list1);
+
+            foreach(KeyValuePair<int, ArrayList> keyValue in students)
+            {
+                PrintInfoStu(keyValue.Value);
+            }
+
+            foreach (KeyValuePair<int, LinkedList<Aspirant>> keyValue in aspirants)
+            {
+                PrintInfoAsp(keyValue.Value);
             }
 
         }
