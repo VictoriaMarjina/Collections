@@ -45,7 +45,7 @@ namespace StuAsp
                     default:
                         break;
                 }
-            
+            Console.ReadKey();
         }
         static bool CheckNum(string a)
         {
